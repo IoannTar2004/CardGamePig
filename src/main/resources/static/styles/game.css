@@ -1,0 +1,260 @@
+body {
+    background: url("../images/table.jpg") no-repeat fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+#top {
+    width: 100vw;
+    height: 23vh;
+    position: relative;
+}
+
+#center {
+    width: 100vw;
+    height: 54vh;
+    position: relative;
+}
+
+#bottom {
+    width: 100vw;
+    height: 23vh;
+    position: relative;
+}
+
+.card {
+    width: 120px;
+    height: 180px;
+    position: absolute;
+    border: 1px solid black;
+    border-radius: 20px;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.frame {
+    border: 3px solid lime;
+}
+#move-card {
+    position: absolute;
+    z-index: 999;
+    pointer-events: none;
+}
+
+img.hidden {
+    visibility: hidden;
+}
+
+#blur {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: 0.7;
+}
+
+.center {
+    margin-left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#waiting-window {
+    position: absolute;
+    width: 40vw;
+    height: 50vh;
+    background-color: white;
+    margin-top: 50vh;
+    text-align: center;
+}
+
+#connected-players {
+    margin-top: 23%;
+    display: flex;
+    width: 82%;
+    height: 48%;
+    margin-bottom: -8%;
+}
+
+.player {
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 30%;
+    height: 100%;
+    background-color: #e3d9d9;
+    box-shadow: 10px 1px 1px black;
+}
+
+.connected {
+    background-color: lime;
+}
+
+#you {
+    background-color: white;
+    width: 40%;
+    border-radius: 10px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+#logic-buttons {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 30px;
+}
+
+.logic-button {
+    height: 100%;
+    font-size: 23px;
+    box-shadow: 10px 1px 1px black;
+    border-radius: 5px;
+}
+
+.start-button {
+    width: 20%;
+    background: radial-gradient(green 50%, lime 100%);
+    color: white;
+}
+
+.leave-button {
+    border: 2px solid red;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:disabled {
+    background: white;
+    color: gray;
+}
+
+.leave-button:hover {
+    background: red;
+    color: white;
+}
+
+.start-button:hover:not(:disabled) {
+    background: green;
+}
+
+#black-circle {
+    margin: 12px auto;
+    width: 61%;
+    height: 45%;
+    border-radius: 50px;
+    background-color: black;
+}
+
+.profile {
+    height: 100%;
+    width: 100%;
+    transform: scale(0.7);
+}
+
+#user-clock {
+    margin-top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.game-name {
+    position: absolute;
+    background: wheat;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+#flip-over {
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%);
+    height: 30px;
+    left: 50%;
+    top: -20%;
+    background: wheat;
+    font-weight: bold;
+}
+
+#flip-over:hover {
+    background: white;
+}
+
+.your-move {}
+
+.your-move:hover {
+    border: 2px solid blue;
+    cursor: pointer;
+}
+
+/*окончание игры*/
+
+#finish-window {
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%);
+    left: 50%;
+    top: 50%;
+    width: 40%;
+    height: 50%;
+    background: white;
+    text-align: center;
+}
+
+#players-stat {
+    width: 95%;
+    margin: -20px auto;
+    border-spacing: 15px;
+}
+
+.player-stat {
+    width: 100%;
+    height: 70px;
+    background: wheat;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px black;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 1px;
+    display: flex;
+    grid-gap: 6%;
+}
+
+td {
+    display: flex;
+}
+
+h3 {
+    margin-bottom: 5px;
+}
+
+#rating-text {
+    display: inline-block;
+    border: 1px solid white;
+}
+
+.pig-finish {
+    height: 100%;
+}
+
+#pork-per-year {
+    width: 150px;
+    text-align: center;
+}
+
+.continue {
+    margin-top: 5%;
+    height: 8%;
+    background: linear-gradient(to left, purple 40%, darkblue 75%);
+    color: white;
+    border-radius: 10px;
+}
+
+.continue:hover:not(:disabled) {
+    transform: scale(1.1);
+}
+
+/* Хрюкание */
+
+#pig-lose {
+    height: 60%;
+}
