@@ -27,7 +27,7 @@ public class TableController {
 
     @MessageMapping("/ratingIsChangedInform")
     @SendTo("/home/ratings")
-    public String ratingIsChangedInform(SimpMessageHeaderAccessor sha) {
+    public String ratingIsChangedInform() {
         JSONArray topPlayers = new JSONArray();
         JSONObject jsonObject = new JSONObject().put("top", topPlayers);
 

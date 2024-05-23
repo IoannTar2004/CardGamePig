@@ -35,8 +35,8 @@ export function Header({data, setData}) {
             <img id={"profile"} src={"../images/profile.png"} onClick={() => setProfileClicked(true)}/>
             <div id={"player-data"}>
                 <div id={"name-weight"}>
-                        <h1 id={"name"}>{data.name} <BiPencil size={25}/></h1>
-                    <h1 id={"weight"}>Вес: {data.weight} кг <BiPencil size={25}/></h1>
+                        <h1 id={"name"}>{data.name}</h1>
+                    <h1 id={"weight"}>Вес: {data.weight} кг</h1>
                 </div>
                 <h5 id={"email"}>{data.email}</h5>
             </div>

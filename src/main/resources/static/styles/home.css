@@ -43,6 +43,9 @@ header {
     cursor: pointer;
 }
 
+#player-data {
+    width: 30%;
+}
 #name-weight {
     display: flex;
 }
@@ -52,7 +55,7 @@ header {
 }
 
 #email {
-    margin-top: -10px;
+    margin-top: -1%;
     width: 21vw;
     white-space: nowrap;
     overflow: hidden;
@@ -60,7 +63,7 @@ header {
 }
 
 #weight {
-    margin-left: 30px;
+    margin-left: 20%;
     white-space: pre-wrap;
 }
 

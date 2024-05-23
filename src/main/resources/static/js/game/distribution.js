@@ -21,7 +21,7 @@ export function Distribution({common, move, pos, players}) {
     const createDeck = () => {
         let cards = []
         let offset = 21
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 35; i++) {
             cards.push(<Card id={"card" + i} className={"deck click-card"} image={"shirt"} top={"50%"} left={`${offset}%`}
              onClick={(el) => events.click(el)}
              onMouseEnter={(el) => events.mouseEnterOnCardDeck(el)}
