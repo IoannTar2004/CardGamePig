@@ -2,6 +2,7 @@ package org.ioanntar.webproject.logic;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.NoArgsConstructor;
+import org.ioanntar.webproject.config.RequestsStat;
 import org.ioanntar.webproject.database.entities.Game;
 import org.ioanntar.webproject.database.entities.Player;
 import org.ioanntar.webproject.database.entities.PlayerProps;
@@ -21,12 +22,15 @@ import java.util.List;
 @NoArgsConstructor
 public class GameConnector {
 
+    private final RequestsStat requestsStat = new RequestsStat();
+
     public void create(HttpSession session, int count) {
         Database database = new Database();
 
         Game game = database.merge(new Game(count));
         Player player = database.get(Player.class, (long) session.getAttribute("playerId"));
         game.getPlayerProps().add(new PlayerProps(player.getPlayerId(), game, 0));
+        requestsStat.addRequest(player, RequestsStat.RequestMessages.CREATE_GAME);
 
         database.commit();
         session.setAttribute("gameId", game.getId());
@@ -45,6 +49,7 @@ public class GameConnector {
         }
 
         Game gameObject = game.fetchObjectFromProxy();
+        requestsStat.addRequest(player, RequestsStat.RequestMessages.EXIT_GAME);
         database.commit();
         return gameObject;
     }
@@ -85,6 +90,7 @@ public class GameConnector {
         game.getPlayerProps().add(new PlayerProps(player.getPlayerId(), game, game.getPlayerProps().size()));
         session.setAttribute("gameId", gameId);
         jsonObject.put("status", "ok");
+        requestsStat.addRequest(player, RequestsStat.RequestMessages.JOIN_GAME);
 
         database.commit();
         return jsonObject.toString();

@@ -3,6 +3,8 @@ package org.ioanntar.webproject.logic;
 import lombok.Getter;
 import org.ioanntar.webproject.database.entities.*;
 import org.ioanntar.webproject.database.utils.Database;
+import org.ioanntar.webproject.mbeans.LastHourPlayed;
+import org.ioanntar.webproject.mbeans.MBeanManager;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
@@ -18,8 +20,9 @@ public class GameManager {
     private final SimpMessagingTemplate template;
     private final Game game;
     private final PlayerProps player;
-
     private final Database database = new Database();
+
+    private static final LastHourPlayed lastHourPlayed = MBeanManager.getLastHourPlayed();
 
     public GameManager(SimpMessageHeaderAccessor sha, SimpMessagingTemplate template) {
         this.sha = sha;
@@ -124,6 +127,7 @@ public class GameManager {
             e.getPlayer().setLastGame(new Timestamp(System.currentTimeMillis()));
         });
         game.getPlayerProps().forEach(e -> e.getPlayersDeck().clear());
+        lastHourPlayed.setPercents(database);
 
         return playerStat;
     }

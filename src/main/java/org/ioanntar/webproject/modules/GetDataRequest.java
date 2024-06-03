@@ -2,6 +2,7 @@ package org.ioanntar.webproject.modules;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.NoArgsConstructor;
+import org.ioanntar.webproject.config.RequestsStat;
 import org.ioanntar.webproject.database.entities.Player;
 import org.ioanntar.webproject.database.utils.Database;
 import org.ioanntar.webproject.database.utils.DatabaseProvider;
@@ -18,6 +19,7 @@ import java.util.List;
 public class GetDataRequest {
 
     private JSONObject object;
+    private final RequestsStat requestsStat = new RequestsStat();
 
     public GetDataRequest(JSONObject object) {
         this.object = object;
@@ -29,6 +31,7 @@ public class GetDataRequest {
         Player player = database.get(Player.class, id);
         JSONObject jsonObject = JSONUtils.getClient(player);
         jsonObject.put("gameId", player.getPlayerProps() != null ? player.getPlayerProps().getGame().getId() : null);
+        requestsStat.addRequest(player, RequestsStat.RequestMessages.ENTER);
 
         database.commit();
         return jsonObject;
@@ -70,6 +73,7 @@ public class GetDataRequest {
         }
         Player player = new Player(object.getString("name"), email, sha, (int) object.getNumber("weight"));
         player = database.merge(player);
+        requestsStat.addRequest(player, RequestsStat.RequestMessages.CHECK_IN);
 
         session.setAttribute("playerId", player.getPlayerId());
         jsonObject.put("status", "ok");
