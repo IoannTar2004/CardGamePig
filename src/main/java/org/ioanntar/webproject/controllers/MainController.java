@@ -6,6 +6,7 @@ import org.ioanntar.webproject.config.RequestsStat;
 import org.ioanntar.webproject.database.entities.Player;
 import org.ioanntar.webproject.database.utils.Database;
 import org.ioanntar.webproject.logic.GameConnector;
+import org.ioanntar.webproject.logic.PrivilegeService;
 import org.ioanntar.webproject.mbeans.CreatedGames;
 import org.ioanntar.webproject.mbeans.MBeanManager;
 import org.ioanntar.webproject.modules.GetDataRequest;
@@ -18,7 +19,7 @@ public class MainController {
     private static final CreatedGames createdGames = MBeanManager.getCreatedGames();
 
     @PostMapping("/registration")
-    public String registration(@RequestParam(name = "data") String data, HttpServletRequest servletRequest) {
+    public String registration(@RequestBody String data, HttpServletRequest servletRequest) {
         HttpSession session = servletRequest.getSession();
         GetDataRequest request = new GetDataRequest(new JSONObject(data));
 
@@ -26,7 +27,7 @@ public class MainController {
     }
 
     @PostMapping("/enter")
-    public String enter(@RequestParam(name = "data") String data, HttpServletRequest servletRequest) {
+    public String enter(@RequestBody String data, HttpServletRequest servletRequest) {
         HttpSession session = servletRequest.getSession();
         GetDataRequest request = new GetDataRequest(new JSONObject(data));
         JSONObject response = request.clientEnter(session);
@@ -55,7 +56,7 @@ public class MainController {
     }
 
     @PostMapping("/createGame")
-    public void createGame(@RequestParam(name = "data") String data, HttpServletRequest request) {
+    public void createGame(@RequestBody String data, HttpServletRequest request) {
         JSONObject jsonObject = new JSONObject(data);
         GameConnector gameConnector = new GameConnector();
         createdGames.gameCreateNotify();
@@ -74,9 +75,17 @@ public class MainController {
     }
 
     @PostMapping("/joinGame")
-    public String joinGame(@RequestParam(name = "data") String data, HttpServletRequest request) {
+    public String joinGame(@RequestBody String data, HttpServletRequest request) {
         JSONObject jsonObject = new JSONObject(data);
         GameConnector gameConnector = new GameConnector();
         return gameConnector.join(request.getSession(), jsonObject.getLong("gameId"));
+    }
+
+    // временный обработчик для karate тестов
+    @PostMapping("/removeTestPlayer")
+    public String removeTestPlayer(@RequestBody String data) {
+        JSONObject json = new JSONObject(data);
+        new PrivilegeService(json.getString("password")).removeTestPlayer(json.getString("email"));
+        return null;
     }
 }

@@ -26,7 +26,7 @@ public class WebApplication {
         }
 
         HibernateUtils.init();
-        new Thread(new FakeRequests()).start();
+//        new Thread(new FakeRequests()).start();
         SpringApplication.run(WebApplication.class, args);
     }
 
@@ -41,7 +41,7 @@ public class WebApplication {
                 for (int i = 0; i < 500; i++)
                     requestsStat.addRequest(player, RequestsStat.RequestMessages.values()[(int) (Math.random() * 6)]);
                 try {
-                    System.out.println(RequestsStat.getRequests().size());
+//                    System.out.println(RequestsStat.getRequests().size());
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

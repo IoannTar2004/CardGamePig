@@ -18,11 +18,6 @@ public class GameController {
     @Autowired
     private SimpMessagingTemplate template;
 
-    @MessageMapping("/le")
-    public void le(SimpMessageHeaderAccessor sha) {
-        System.out.println(sha);
-    }
-
     @MessageMapping("/connect")
     public void bind(@Payload String data, SimpMessageHeaderAccessor sha) {
         GameConnector gameConnector = new GameConnector();

@@ -398,8 +398,9 @@ __webpack_require__.r(__webpack_exports__);
 function ajax(action, method, data) {
   var xhr = new XMLHttpRequest();
   xhr.open(method, action, true);
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.send('data=' + JSON.stringify(data));
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  var a = JSON.stringify(data);
+  xhr.send(a);
   return xhr;
 }
 
